@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tetris</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+  <header>
+    <div class="neon">
+      <span class="text" data-text="tetris">tetris</span>
+      <span class="spotlight"></span>
+    </div>
+    <div>
+      <button onclick="rules()" class="rules-button" id='buttonRule'>Game rules</button>
+      <button onclick = "toggleSound()" class="sound-button" id='buttonSound'>Sound</button>
+      <span class = "hidden" id="userName"></span>
+    </div>
+  </header>
+
+<!-- Первая часть: стартовая с правилами-->
+  <div class="gameRule hidden" id="gameRule">
+    <div>
+      <p>Игоровое поле шириной 10 и высотой 20 клеток.<br> Цель игрока заполнить горизонтальный ряд из 10 клеток.<br>В полёте игрок может поворачивать фигурку на 90° (клавиша - "up") и двигать её по 
+      горизонтали.<br> Сброс фигуры можно осуществить нажав клавишу "space".<br> В поле слева показывается следующая выпадающая фигура. <br> 
+      Темп игры постепенно ускоряется. Игра заканчивается, когда новая фигурка не может поместиться 
+      в игровое поле. <br> Игрок получает очки за каждый заполненный ряд и за самостоятельный сброс фигурки.</p>
+    </div>
+    <button onclick = "showProfileForm()" class="continue-button" id='buttonPlay'>Play</button>
+  </div>
+
+<!-- Вторая часть: пользователь-->
+  <section id="userForm" class="hidden">
+    <form method="POST" id="user_form" action="javascript:void(null);">
+      <div id="formGroup" class="form-group">
+        <label for="">First Name</label>
+        <input type="text" id = "firstName" name="firstName" required>
+      </div>
+      <div id="buttonControl">
+        <button onclick = "createPlayer()" id="btnSubmitForm" class="continue-button" type="submit">Create profile</button>
+        <button onclick = "skipPlayer()" id="btnSkip" class="continue-button" type="submit">Skip</button>
+      </div>
+      <div id = "btnPlay" class="hidden">
+        <button id="goToPlay" class="continue-button" type="submit">Go to Play</button>
+      </div>
+    </form>
+  </section>
+
+<!-- Главная часть: игровое поле-->
+  <div class="hidden" id="gameField">
+    <div class="left-column">
+      <div class="score-part">
+        <p>Score: <span id="score">0</span></p>
+        <p>Lines: <span id="lines">0</span></p>
+        <p>Level: <span id="level">0</span></p>
+      </div>
+      <div class="modul-part">
+        <canvas id="next" class="next"></canvas>
+      </div>
+      <button onclick="pause()" class="pause-button" id='button'>Pause</button>
+      <button onclick="play()" class="play-button" id='button'>Play</button>
+    </div>
+    <canvas id="board" class="game-board"></canvas>
+  </div>
+
+  <div class="game-rules" id="close-rules">
+    <div id='text-rules'>
+      <p>Игоровое поле шириной 10 и высотой 20 клеток.<br> Цель игрока заполнить горизонтальный ряд из 10 клеток.<br>В полёте игрок может поворачивать фигурку на 90° (клавиша - "up") и двигать её по 
+      горизонтали.<br> Сброс фигуры можно осуществить нажав клавишу "space".<br> В поле слева показывается следующая выпадающая фигура. <br> 
+      Темп игры постепенно ускоряется. Игра заканчивается, когда новая фигурка не может поместиться 
+      в игровое поле. <br> Игрок получает очки за каждый заполненный ряд и за самостоятельный сброс фигурки.</p>
+    </div>
+    <button onclick="showRules()" class="continue-button-rule" id='button'>Continue</button>
+  </div>
+  <div class="mobile-control">
+    <button class="up" id="rotate_button">ROTATE</button>
+    <button class="left" id="left_button">LEFT</button>
+    <button class="center" id="down_button">DOWN</button>
+    <button class="right" id="right_button">RIGHT</button>
+    <button class="down" id="drop_button">DROP</button>
+  </div>
+
+  <audio src="audio/MainSound.mp3" preload="auto" loop="true" id="audioGame">
+
+  <audio id=audioGameOver preload>
+    <source src="audio/game_Over.mp3" type="audio/mpeg">
+  </audio>
+  <audio id=audioLine preload>
+    <source src="audio/destroy.mp3" type="audio/mpeg">
+  </audio>
+  <script src='http://fe.it-academy.by/JQ/jquery.js'></script>
+  <script type="text/javascript" src="main.js"></script>
+</body>
+</html>

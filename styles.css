@@ -1,0 +1,550 @@
+* {
+    box-sizing: border-box; 
+  }
+  
+  /*НАЧАЛО HEADER ТЕТРИС*/
+  header {
+    margin: 0.5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .neon {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .text {
+    background-color: #dcdbde;
+    color: white;
+    font-size: 70px;
+    font-weight: bold;
+    font-style: italic;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    position: relative;
+    user-select: none;
+  }
+  
+  .text::before {
+    content: attr(data-text);
+    position: absolute;
+    color: white;
+    filter: blur(0.02em);
+    mix-blend-mode: exclusion;
+  }
+  
+  .spotlight {
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(
+            circle,
+            #8778c3,
+            transparent 20%
+        ) center / 25% 25%,
+        radial-gradient(
+            circle,
+            #777090,
+            black 15%
+        ) center / 12.5% 12.5%;
+    animation: light 60s linear infinite;
+    mix-blend-mode: color-dodge;
+  }
+  
+  @keyframes light {
+    to {
+        transform: translate(50%, 50%);
+    }
+  }
+  /*КОНЕЦ HEADER ТЕТРИС*/
+  
+  
+  body {
+    background: url("img/tetris.jpg") center no-repeat;
+    background-size: cover;
+    min-height: 1000px;
+  }
+
+  .hidden {
+    display: none;
+  }
+  
+  /*начало игровая область*/
+  .grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  
+  .grid canvas#board, .grid > div {
+    margin: 0 3em;
+  }
+
+  .game-board {
+    background: linear-gradient(5deg, #f1f1b1ad 30%, #bcf5bcc2 60%, #9ea5a39e 100%);
+  }
+  
+  .left-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .score-part {
+    border: solid 4px #f1dbee;
+    border-radius: 15%;
+    box-shadow: 0 10px 22px 0 rgb(0 0 0 / 50%);
+    margin: 0 auto;
+    background: linear-gradient(90deg, #f1f1b1ad 30%, #bcf5bcc2 60%, #9ea5a39e 100%);
+    font-style: italic;
+    font-weight: 700;
+    align-items: center;
+    display: block;
+  }
+
+  .modul-part {
+    border: solid 4px #f3ceca;
+    box-shadow: 0 10px 22px 0 rgb(0 0 0 / 50%);
+    margin: 0 auto;
+    background: linear-gradient(180deg, #f1f1b1ad 30%, #bcf5bcc2 60%, #9ea5a39e 100%);
+
+  }
+  
+  .left-column p {
+    font-size: 30px;
+    margin: 15px;
+  }
+  
+  .left-column > div {
+    width: 13em;
+  }
+  
+  .game-board {
+    border: solid 4px #928d8d;
+  }
+  
+  /*конец игровой области*/
+  
+  /*начало кнопки игры*/
+  .play-button, .pause-button, .rules-button, .continue-button, .sound-button, .profile-button, .continue-button-rule  {
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    padding: 12px 40px;
+    margin: 10px 20px;
+    border-radius: 30px;
+    background-image: linear-gradient(123deg, #f1f1b1ad 50%, #bcf5bcc2 70%, #9ea5a39e 100%);
+    background-position: 70% 0;
+    background-size: 200% 200%;
+    font-size: 24px;
+    font-weight: 300;
+    color: rgba(13, 14, 13);
+    box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.74);
+    transition: .5s;
+  }
+  
+  #buttonPlay {
+    width: 200px;
+    position: relative;
+    /* left: 47%;
+    transform: translate(-50%, 0); */
+  }
+
+  #btnSkip {
+    display: none;
+  }
+
+  .play-button:hover, .pause-button:hover, .rules-button:hover, .continue-button:hover {
+    box-shadow: 0 0 0 0 rgba(56, 14, 206, 0);
+    background-position: 20% 20%;
+    cursor: pointer;
+  }
+  
+  .user_form {
+    display: flex;
+    flex-direction: column;
+    z-index: 30;
+    padding: 50px;
+  }
+
+  .user-form form {
+    min-width: 250px;
+    max-width: 350px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 15px 20px;
+    border-radius: 2px;
+    color: #69dbdf;
+    text-shadow: 1px 1px 2px black, 0 0 1em black;
+    background-color: #201f1f77;
+    -webkit-box-shadow: 1px 2px 12px -1px rgba(45, 41, 41, 0.92);
+    box-shadow: 1px 2px 12px -1px rgba(45, 41, 41, 0.92);
+  }
+
+  .user-form form button {
+    margin: 0 auto;
+    display: block;
+  }
+
+  .user_name {
+    color: #69dbdf;
+    font-size: 35px;
+    text-shadow: 1px 1px 2px black, 0 0 1em black;
+  }
+
+  .form-group {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    display: none;
+    font-size: 30px;
+  }
+
+  .profiles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 30;
+    position: fixed;
+    left: 0;
+    top: 100px;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    background-color: rgba(29, 29, 29, 0.65);
+  }
+
+  .profiles-container {
+    max-height: 80%;
+    overflow: auto;
+  }
+
+  .profiles-container header {
+    justify-content: flex-end;
+    margin-bottom: 20px;
+  }
+
+  .profiles table {
+    padding: 10px;
+    /* font-family: Melted; */
+    border: 1px solid #af111c;
+    min-width: 500px;
+    border-radius: 2px;
+    background-color: #d6d3d3;
+  }
+  
+  .profiles-container footer {
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .profiles-table, .rating-table{
+    overflow: auto;
+  }
+  
+  .profiles-table th {
+    color: #af111c;
+  }
+  
+  .profiles-table th,
+  td {
+    padding: 5px 10px;
+  }
+  
+  .profile-row.active {
+    background-color: #af111c;
+    color: #f2f2f2;
+    text-shadow: 1px 1px 2px black, 0 0 1em black;
+  }
+  
+  .profile-row:hover {
+    cursor: pointer;
+    background-color: #af111c;
+    color: #f2f2f2;
+    text-shadow: 1px 1px 2px black, 0 0 1em black;
+  }
+  
+  .profile-row > td {
+    word-wrap: break-word;
+  }
+
+
+  .rules a.button-main {
+    margin-top: 30px;
+  }
+
+  .button-main {
+    border: none;
+    /* font-family: Arial, Helvetica, sans-serif, sans-serif; */
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+    padding: 5px 10px;
+    outline: none;
+    border-radius: 2px;
+    color: #00f7ff;
+    text-shadow: 1px 1px 2px black, 0 0 1em black;
+  }
+
+  .button-main:hover,
+  .button-main.button-selected {
+    cursor: pointer;
+    background-color: #00f7ff;
+    color: #f2f2f2;
+    text-shadow: 1px 1px 2px black, 0 0 1em black;
+  }
+
+
+  
+  @media(min-width: 670px) {
+    .form-group label {
+      display: block;
+    }
+  }
+
+  @media(min-width: 670px) {
+    .button-main {
+      font-size: 30px;
+    }
+  }
+
+  input {
+    border: none;
+    outline: none;
+    margin-top: 5px;
+    padding: 7px 7px;
+    border: 2px solid #e4e4e4;
+    border-radius: 2px;
+    /* font-family: Melted; */
+    font-size: 18px;
+    background-color: #f5f5f5;
+  }
+
+  .pause-button {
+    display: none; /*изначально кнопка не показываеся, добавляется после старта*/
+  }
+
+  .underline {
+    text-decoration: line-through;
+    color: rgb(209, 228, 41);
+    background-color: #bb19a0;
+
+  }
+  /*конец кнопки игры*/
+  
+  
+  @media only all and (min-width: 1100px) {
+    
+    div.mobile-control {
+      display: none;
+    }
+
+    .grid{
+      margin-top: 0px;
+    }
+
+    header {
+      margin-top: 0;
+    }
+  
+    #text-rules p {
+      font-size: 2.7vmin;
+    }
+
+    .left-column {
+      /* flex-direction: row; */
+      padding: 0 0.5em;
+    }
+  
+  }
+  
+  @media only all and (max-width: 850px) {
+    .left-column div p, .rules-button, .sound-button, .continue-button {
+      font-size: 16px;
+    }
+
+    #buttonPlay {
+      align-items: center;
+      width: 75px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .continue-button-rule {
+      display: inline-block;
+      align-items: center;
+      width: 75px;
+      display: flex;
+      justify-content: center;
+      font-size: 16px;
+      left: 45%;
+    }
+
+    #btnSkip {
+      display: block;
+    }
+
+    .left-column div p, .play-button, .pause-button {
+      font-size: 16px;
+    }
+  
+    .rules-button, .sound-button {
+      padding: 0.5em;
+      margin: 0.5em;
+    }
+
+    .play-button, .pause-button {
+      padding: 1px;
+      margin: 0.1em;
+      height: 75px;
+      display: inline-block;
+      border-radius: 20%;
+    }
+  
+    .left-column {
+      flex-direction: row;
+      padding: 0 0.5em;
+    }
+  
+    .left-column > div {
+      width: 9em;
+    }
+  
+    .text {
+      font-size: 3em;
+    }
+
+    .neon {
+      display: none;
+    }
+  }
+
+   /*создается в animbutton.js*/
+  particle {
+    position: fixed;
+    left: 0;
+    top: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+  }
+  
+  /*Кнопки для мобильных*/
+  .mobile-control {
+    text-align: center;
+    margin: 1em;
+  }
+  
+  .mobile-control button {
+    width: 20%;
+    display: block;
+    margin: 2px auto; 
+    font-size: 1vw;
+    background: whitesmoke;
+    border-radius: 2px;
+    font-family: arial;
+    padding: 15px 0px;
+    cursor: pointer;
+    transition: box-shadow 0.1s ease-in-out, color 0.1s ease;
+  }
+  
+  button.left, button.center, button.right {
+    display: inline-block;
+  }
+  
+  .up {
+    color: #131311;
+    border: solid 2px #7f8c8d;
+  }
+  .up:active {
+    box-shadow: inset 0 -3em #7f8c8d;
+    color: #e9d843;
+  }
+  
+  .left {
+    color: #131311;
+    border: solid 2px #7f8c8d;
+  }
+  .left:active {
+    box-shadow: inset -10em 0 #7f8c8d;
+    color: #e9d843;
+  }
+  
+  .center {
+    color: #131311;
+    border: solid 2px #7f8c8d;
+  }
+  .center:active {
+    box-shadow: inset 0 0 0 2em #7f8c8d;
+    color: #e9d843;
+  }
+  
+  .right {
+    color: #131311;
+    border: solid 2px #7f8c8d;
+  }
+  .right:active {
+    box-shadow: inset 10em 0 #7f8c8d;
+    color: #e9d843;
+  }
+  
+  .down {
+    color: #131311;
+    border: solid 2px #7f8c8d;
+  }
+  .down:active {
+    box-shadow: inset 0 3em #7f8c8d;
+    color: #e9d843;
+  }
+  /*КОНЕЦ Кнопки для мобильных*/
+  
+  /*ПРАВИЛА ИГРЫ*/
+  .game-rules {
+    transition: top 2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+  
+  #close-rules {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50vw;
+    position: absolute;
+    top: -100vmax;
+    left: 25vw;
+    z-index: 100;
+    text-align: center;
+    color: #000000;
+    border-radius: 2em;
+    background: linear-gradient(90deg, #cece3cad 30%, #7cf57cc2 60%, #67f1ca9e 100%);
+  }
+
+  .gameRule {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    font-size: 30px;
+    color: #000000;
+    border-radius: 2em;
+    background: linear-gradient(90deg, #3c87cead 30%, #eb7cf5c2 60%, #67f1ca9e 100%);
+  }
+
+  
+  .game-rules p,
+  .gameRule p {
+    font-size: 2vmin;
+    margin: 1em;
+  }
+  /*КОНЕЦ ПРАВИЛА ИГРЫ*/
